@@ -1,0 +1,68 @@
+body{
+    margin:0;
+}
+
+*,*::after,*::before{
+    box-sizing: border-box;
+}
+p,span,h1,h2,h3,h4,h5{
+    margin:0;
+}
+
+#content{
+    position: relative;
+    width: 800px;
+    height: 600px;
+    display: flex;
+    left: 50%;
+    transform: translateX(-50%);
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 10px;
+}
+#defaultCanvas0{
+    position: relative;
+}
+#btn-container{
+    position: relative;
+    margin:1rem 0;
+}
+.btn{
+    width: 100px;
+    height: 40px;
+    background-color: rgb(207, 207, 207);
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+    border:none;
+    outline:none;
+    transition: background-color 100ms ease-in;
+    user-select: none;
+}
+.btn:hover{
+    background-color: rgb(185, 185, 185);
+}
+
+.checkbox-btn{
+    margin-top:1rem;   
+}
+
+.active{
+    background-color: rgb(0, 165, 0);
+    box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.4);
+    color: black;
+}
+.active:hover{
+    background-color:rgb(0, 165, 0);
+}
+#options-menu{
+    position: absolute;
+    height: 80vh;
+    width:15%;
+    margin: 1rem;
+    padding: 1.5rem;
+    background-color: rgb(223, 223, 223);
+    box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    
+}
