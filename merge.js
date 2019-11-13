@@ -1,5 +1,3 @@
-var Util = require("./util.js");
-
 /* Merge Sort */
 
 var Arr,left,right,sleepTime;
@@ -46,7 +44,7 @@ async function Merge(arr,l,m,r){
         j++;
     }
     postMessage(Arr);
-    await Util.sleep(sleepTime);
+    await sleep(sleepTime);
 }
 
 async function MergeSort(arr,l,r){
@@ -66,8 +64,8 @@ onmessage = async (arr) => {
         left = arr.data[1];
         right = arr.data[2];
         sleepTime = arr.data[3];
-        var isSorted = Util.isSorted(arr);
-        if(!isSorted){
+        var sorted = isSorted(Arr);
+        if(!sorted){
             let time = performance.now();    
             await MergeSort(Arr,left,right);
             let time2 = performance.now() - time;
@@ -78,4 +76,20 @@ onmessage = async (arr) => {
     }else{
         Arr = undefined;
     }
+}
+
+// UTIL
+
+const sleep = (milliseconds) => {
+    return new Promise(resolve => setTimeout(resolve, milliseconds))
+}
+
+function isSorted(arr){
+    let done = true;
+    for(let i = 0;i<arr.length;i++){
+        if(arr[i]>arr[i+1]){
+            done = false;
+        }
+    }
+    return done;
 }
