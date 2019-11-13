@@ -1,17 +1,5 @@
 // UTIL
 
-const sleep = (milliseconds) => {
-    return new Promise(resolve => setTimeout(resolve, milliseconds))
-}
+const def = () => {console.log("nothin here go away")};
 
-function isSorted(arr){
-    let done = true;
-    for(let i = 0;i<arr.length;i++){
-        if(arr[i]>arr[i+1]){
-            done = false;
-        }
-    }
-    return done;
-}
-
-module.exports = [sleep,isSorted];
+export default def;

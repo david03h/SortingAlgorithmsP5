@@ -1,6 +1,6 @@
 /* Merge Sort */
 
-var Arr,left,right,sleepTime;
+var Arr,Util,left,right,sleepTime;
 
 async function Merge(arr,l,m,r){
 
@@ -44,7 +44,7 @@ async function Merge(arr,l,m,r){
         j++;
     }
     postMessage(Arr);
-    await sleep(sleepTime);
+    await Util.sleep(sleepTime);
 }
 
 async function MergeSort(arr,l,r){
@@ -60,11 +60,12 @@ async function MergeSort(arr,l,r){
 
 onmessage = async (arr) => {
     if(typeof arr.data[0] == "object"){
-        Arr = arr.data[0];
-        left = arr.data[1];
-        right = arr.data[2];
-        sleepTime = arr.data[3];
-        var sorted = isSorted(Arr);
+        Arr = arr.data[0][0];
+        left = arr.data[0][1];
+        right = arr.data[0][2];
+        sleepTime = arr.data[0][3];
+        Util = arr.data[1];
+        var sorted = Util.isSorted(Arr);
         if(!sorted){
             let time = performance.now();    
             await MergeSort(Arr,left,right);
@@ -76,20 +77,4 @@ onmessage = async (arr) => {
     }else{
         Arr = undefined;
     }
-}
-
-// UTIL
-
-const sleep = (milliseconds) => {
-    return new Promise(resolve => setTimeout(resolve, milliseconds))
-}
-
-function isSorted(arr){
-    let done = true;
-    for(let i = 0;i<arr.length;i++){
-        if(arr[i]>arr[i+1]){
-            done = false;
-        }
-    }
-    return done;
-}
+} 

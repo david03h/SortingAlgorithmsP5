@@ -49,7 +49,6 @@ function setup(){
     for(let i = 0;i<NUMBERS_COUNT;i++){
         Arr[i] = ((Math.random()*1000000)%(RANGE[1]-RANGE[0]))+RANGE[0];
     }
-
 }
 
 var ChartX = (width-CHART_WIDTH)/2,
@@ -69,8 +68,8 @@ function draw(){
     }
 }
 
-var workers = [bubble = new Worker("./bubble.js"),
-               merge = new Worker("./merge.js")];
+var workers = [new Worker("./bubble.js"),
+               new Worker("./merge.js")];
 var activeWorker;
 var lastWorker;
 
@@ -85,10 +84,10 @@ function Sort(){
     lastWorker ? lastWorker.postMessage("stop") : null;
     switch(index){
         case 1:
-            activeWorker.postMessage([Arr,ALHORYTHMS_SLEEP]);
+            activeWorker.postMessage([[Arr,ALHORYTHMS_SLEEP],new Util()]);
             break;
         case 2:
-            activeWorker.postMessage([Arr,0,NUMBERS_COUNT-1,ALHORYTHMS_SLEEP]);
+            activeWorker.postMessage([[Arr,0,NUMBERS_COUNT-1,ALHORYTHMS_SLEEP],new Util()]);
             break;
         case 3:
             break;
@@ -113,8 +112,20 @@ async function randomizeArr(){
     Sort();
 }
 
-// UTIL
+// UTIL //
 
-const sleep = (milliseconds) => {
-    return new Promise(resolve => setTimeout(resolve, milliseconds))
+class Util{
+    sleep(milliseconds){
+        return new Promise(resolve => setTimeout(resolve, milliseconds))
+    }
+    
+    isSorted(arr){
+        let done = true;
+        for(let i = 0;i<arr.length;i++){
+            if(arr[i]>arr[i+1]){
+                done = false;
+            }
+        }
+        return done;
+    }
 }

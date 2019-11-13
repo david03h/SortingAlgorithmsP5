@@ -1,5 +1,5 @@
 /* Bubble Sort */
-var Arr,
+var Arr,Util,
     done = false,
     stop = false;
 
@@ -19,16 +19,19 @@ async function BubbleSort(){
                 done = false;
             }
         }
-        await sleep(sleepTime);
+        await Util.sleep(sleepTime);
         Arr ? postMessage(Arr) : null;
     }
 }
 
 onmessage = async (arr) => {
     if(typeof arr.data == "object"){
-        Arr = arr.data[0];
-        sleepTime = arr.data[1]
-        var sorted = isSorted(Arr);
+        Arr = arr.data[0][0];
+        sleepTime = arr.data[0][1];
+        Util = arr.data[1];
+        console.log(arr.data);
+        console.log(Util);
+        var sorted = Util.isSorted(Arr);
         if(!sorted){
             let time = performance.now();    
             await BubbleSort();
@@ -40,20 +43,4 @@ onmessage = async (arr) => {
     }else{
         Arr = undefined;
     }
-}
-
-// UTIL
-
-const sleep = (milliseconds) => {
-    return new Promise(resolve => setTimeout(resolve, milliseconds))
-}
-
-function isSorted(arr){
-    let done = true;
-    for(let i = 0;i<arr.length;i++){
-        if(arr[i]>arr[i+1]){
-            done = false;
-        }
-    }
-    return done;
 }
